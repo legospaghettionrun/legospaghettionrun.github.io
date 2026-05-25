@@ -19,17 +19,19 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
+        working-directory: ./legospaghettionrun
         run: npm ci
 
       - name: Build static site
+        working-directory: ./legospaghettionrun
         run: npm run export
 
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          publish_dir: docs
+          publish_dir: legospaghettionrun/docs
           github_token: ${{ secrets.GITHUB_TOKEN }}
